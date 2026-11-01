@@ -1,7 +1,16 @@
 codigo,nombre,categoria,precio,descripcion,fotos,estado
-AUR-001,Cadena cubana 5 mm,Cadenas,90000,Oro laminado. Largo 50 cm. Cierre de caja.,ejemplo-cadena.svg,nuevo
-AUR-002,Pulsera eslabón (ejemplo),Pulseras,60000,Oro laminado. Largo 20 cm.,ejemplo-pulsera.svg,disponible
-AUR-003,Anillo sello (ejemplo),Anillos,70000,Oro laminado. Tallas 8 a 12.,ejemplo-anillo.svg,disponible
-AUR-004,Argollas medianas (ejemplo),Aretes,45000,Oro laminado. Diámetro 2 cm. El par.,ejemplo-aretes.svg,disponible
-AUR-005,Dije medalla estrella (ejemplo),Dijes,55000,Oro laminado. Incluye cadena de 45 cm.,ejemplo-dije.svg|ejemplo-cadena2.svg,disponible
-AUR-006,Cadena lazo 3 mm (ejemplo),Cadenas,65000,Oro laminado. Largo 55 cm.,ejemplo-cadena2.svg,agotado
+AUR-001,Manilla tejida Bolsa de dinero,Manillas,105000,,manilla-tejida-bolsa-de-dinero.jpg,disponible
+AUR-002,Manilla tejida Corona,Manillas,125000,,manilla-tejida-corona.jpg,disponible
+AUR-003,Manilla tejida Trébol negro,Manillas,105000,,manilla-tejida-trebol-negro.jpg,disponible
+AUR-004,Manilla tejida San Benito,Manillas,105000,,manilla-tejida-san-benito.jpg,disponible
+AUR-005,Manilla tejida San Benito Dorada grande,Manillas,135000,,manilla-tejida-san-benito-dorada-grande.jpg,disponible
+AUR-006,Manilla tejida San Benito Dorada pequeña,Manillas,90000,,manilla-tejida-san-benito-dorada-pequena.jpg,disponible
+AUR-007,Manilla tejida Neoprenos y Balín Diamantado No. 6 (roja),Manillas,80000,,manilla-tejida-neoprenos-y-balin-diamantado-no-6-roja.jpg,disponible
+AUR-008,Manilla tejida Neoprenos y Balines Diamantados No. 6 (negra),Manillas,60000,,manilla-tejida-neoprenos-y-balines-diamantados-no-6-negra.jpg,disponible
+AUR-009,Anillo 1 carril balines lisos,Anillos,45000,,anillo-1-carril-balines-lisos.jpg,disponible
+AUR-010,Anillo tejido balines lisos,Anillos,45000,,anillo-tejido-balines-lisos.jpg,disponible
+AUR-011,Anillo tejido Corona,Anillos,90000,,anillo-tejido-corona.jpg,disponible
+AUR-012,Anillo tejido San Benito,Anillos,90000,,anillo-tejido-san-benito.jpg,disponible
+AUR-013,Topos rosca de seguridad San Benito,Topos,90000,,topos-rosca-de-seguridad-san-benito.jpg,disponible
+AUR-014,Topos rosca de seguridad Virgen,Topos,90000,,topos-rosca-de-seguridad-virgen.jpg,disponible
+AUR-015,Topos rosca de seguridad Joya verde,Topos,90000,,topos-rosca-de-seguridad-joya-verde.jpg,disponible
