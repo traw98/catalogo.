@@ -1,5 +1,5 @@
 codigo,nombre,categoria,precio,descripcion,fotos,estado
-AUR-001,Cadena cubana 5 mm (ejemplo),Cadenas,85000,Oro laminado. Largo 50 cm. Cierre de caja.,ejemplo-cadena.svg,nuevo
+AUR-001,Cadena cubana 5 mm,Cadenas,85000,...   →   AUR-001,Cadena cubana 5 mm,Cadenas,90000,...
 AUR-002,Pulsera eslabón (ejemplo),Pulseras,60000,Oro laminado. Largo 20 cm.,ejemplo-pulsera.svg,disponible
 AUR-003,Anillo sello (ejemplo),Anillos,70000,Oro laminado. Tallas 8 a 12.,ejemplo-anillo.svg,disponible
 AUR-004,Argollas medianas (ejemplo),Aretes,45000,Oro laminado. Diámetro 2 cm. El par.,ejemplo-aretes.svg,disponible
