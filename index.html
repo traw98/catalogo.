@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Catálogo AUREV</title>
+<meta name="description" content="AUREV JEWELRY · Joyas en oro laminado. Elige tu pieza y pídela por WhatsApp.">
+<meta name="theme-color" content="#07070b">
+<meta property="og:title" content="AUREV JEWELRY · Catálogo">
+<meta property="og:description" content="Joyas en oro laminado · Guldpläterade smycken">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Forum&family=Jost:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+<div class="cielo" aria-hidden="true"><canvas id="estrellas"></canvas></div>
+
+<header class="marca">
+  <div class="envoltura marca-in">
+    <div id="logo" class="logo">
+      <svg class="corona" viewBox="0 0 64 28" aria-hidden="true"><path d="M4 24 L8 6 L20 16 L32 2 L44 16 L56 6 L60 24 Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><circle cx="8" cy="5" r="2.4" fill="currentColor"/><circle cx="32" cy="2.4" r="2.4" fill="currentColor"/><circle cx="56" cy="5" r="2.4" fill="currentColor"/></svg>
+      <span class="aurev">AUREV</span>
+      <span class="jewelry">JEWELRY</span>
+    </div>
+    <p class="lema">Joyas en oro laminado <span class="sep">·</span> <span lang="sv">Guldpläterade smycken</span></p>
+    <p class="como">Toca una pieza para verla y pídela por WhatsApp.</p>
+  </div>
+</header>
+
+<nav class="filtros" aria-label="Filtrar catálogo">
+  <div class="envoltura filtros-in">
+    <div id="chips" class="chips" role="group" aria-label="Categorías"></div>
+    <label class="buscar">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M16.5 16.5 L21 21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      <input id="q" type="search" placeholder="Buscar pieza" autocomplete="off" aria-label="Buscar pieza">
+    </label>
+  </div>
+</nav>
+
+<main class="envoltura">
+  <p id="conteo" class="conteo" aria-live="polite"></p>
+  <div id="rejilla" class="rejilla"></div>
+  <div id="vacio" class="vacio" hidden></div>
+</main>
+
+<footer class="pie">
+  <div class="envoltura pie-in">
+    <div>
+      <p class="pie-marca">AUREV JEWELRY</p>
+      <p id="pie-texto" class="pie-texto"></p>
+    </div>
+    <div class="pie-contacto">
+      <p>WhatsApp <span id="pie-wa" class="num"></span></p>
+      <p id="pie-ig" hidden>Instagram <a id="pie-ig-link" href="#" target="_blank" rel="noopener"></a></p>
+    </div>
+  </div>
+  <p class="envoltura derechos">© <span id="anio"></span> AUREV JEWELRY</p>
+</footer>
+
+<a id="flotante" class="flotante" href="#" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5 L5.3 15.6 A8.2 8.2 0 1 1 8.6 18.6 Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 10.2c.4 1.9 2.2 3.8 4.6 4.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+  <span>Escríbenos</span>
+</a>
+
+<dialog id="detalle" class="detalle" aria-labelledby="d-nombre">
+  <button class="cerrar" type="button" id="d-cerrar" aria-label="Cerrar">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6 L18 18 M18 6 L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+  </button>
+  <div class="d-galeria">
+    <div class="d-foto"><img id="d-img" alt=""></div>
+    <div id="d-miniaturas" class="d-miniaturas"></div>
+  </div>
+  <div class="d-info">
+    <p id="d-cat" class="eyebrow"></p>
+    <h2 id="d-nombre"></h2>
+    <p id="d-precio" class="precio grande"></p>
+    <p id="d-desc" class="d-desc"></p>
+    <p id="d-cod" class="codigo"></p>
+    <a id="d-wa" class="btn-wa" href="#" target="_blank" rel="noopener"></a>
+    <button id="d-copiar" class="btn-sec" type="button">Copiar enlace de esta pieza</button>
+    <input id="d-enlace" class="d-enlace" type="text" readonly hidden aria-label="Enlace de la pieza">
+  </div>
+</dialog>
+
+<script src="ajustes.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
