@@ -309,16 +309,6 @@
   $("q").addEventListener("input", function () { busqueda = this.value; pintar(); });
 
   /* ---------- Marca, pie, botón flotante ---------- */
-  (function () {
-    var logo = new Image();
-    logo.onload = function () {
-      var l = $("logo");
-      l.innerHTML = "";
-      logo.alt = "AUREV JEWELRY";
-      l.appendChild(logo);
-    };
-    logo.src = "logo.png";
-  })();
   $("flotante").href = waURL(A.mensajeGeneral || "Hola AUREV, vi el catálogo.");
   $("pie-wa").textContent = A.whatsappVisible || ("+" + WA);
   $("pie-texto").textContent = A.piePagina || "";
@@ -349,47 +339,135 @@
     destino.scrollIntoView({ behavior: quieto ? "auto" : "smooth", block: "start" });
   });
 
-  /* ---------- Cielo estrellado ---------- */
+  /* ---------- Cielo estrellado (estrellas que brillan, avanzan despacio y estrellas fugaces) ---------- */
   (function () {
     var cv = $("estrellas");
     if (!cv || !cv.getContext) return;
     var ctx = cv.getContext("2d");
-    var semilla = 7;
-    var azar = function () { semilla = (semilla * 16807) % 2147483647; return (semilla - 1) / 2147483646; };
-    var estrellas = [];
-    for (var i = 0; i < 520; i++) {
-      estrellas.push({ x: azar(), y: azar(), r: Math.pow(azar(), 3) * 1.5 + 0.25, a: 0.25 + azar() * 0.75, oro: azar() < 0.18 });
-    }
-    function dibujar() {
-      var dpr = Math.min(window.devicePixelRatio || 1, 2);
-      var w = window.innerWidth, h = Math.max(window.innerHeight, (screen && screen.height) || 0);
-      cv.width = w * dpr; cv.height = h * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.clearRect(0, 0, w, h);
-      var cuantas = Math.min(estrellas.length, Math.round(w * h / 2600));
-      for (var i = 0; i < cuantas; i++) {
-        var s = estrellas[i];
-        ctx.beginPath();
-        ctx.arc(s.x * w, s.y * h, s.r, 0, 6.2832);
-        ctx.fillStyle = s.oro ? "rgba(243,220,164," + s.a + ")" : "rgba(236,230,218," + (s.a * 0.85) + ")";
-        ctx.fill();
-        if (s.r > 1.3) {
-          ctx.beginPath();
-          ctx.arc(s.x * w, s.y * h, s.r * 4, 0, 6.2832);
-          ctx.fillStyle = "rgba(243,220,164,0.06)";
-          ctx.fill();
-        }
+    var quieto = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var w = 0, h = 0, dpr = 1, estrellas = [], fugaz = null, proxFugaz = 4000, antes = 0;
+
+    // Halo dorado precalculado (más liviano que dibujar sombras en cada cuadro)
+    var halo = document.createElement("canvas");
+    halo.width = halo.height = 64;
+    var hc = halo.getContext("2d");
+    var g = hc.createRadialGradient(32, 32, 0, 32, 32, 32);
+    g.addColorStop(0, "rgba(255,240,205,0.9)");
+    g.addColorStop(0.25, "rgba(243,220,164,0.35)");
+    g.addColorStop(1, "rgba(243,220,164,0)");
+    hc.fillStyle = g;
+    hc.fillRect(0, 0, 64, 64);
+
+    function crear() {
+      var n = Math.min(650, Math.round(w * h / 2300));
+      estrellas = [];
+      for (var i = 0; i < n; i++) {
+        var capa = Math.random();
+        var r = Math.pow(Math.random(), 3) * 1.5 + 0.3;
+        estrellas.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          r: r,
+          a: 0.35 + Math.random() * 0.65,
+          vel: 0.6 + Math.random() * 2.2,          // velocidad del brillo
+          fase: Math.random() * 6.283,
+          v: 2 + capa * capa * 12,                 // px por segundo: las grandes avanzan más rápido
+          oro: Math.random() < 0.2,
+          destello: r > 1.35
+        });
       }
     }
-    var t;
-    var ultimoAncho = 0;
+
+    function medir() {
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = window.innerWidth;
+      h = Math.max(window.innerHeight, (window.screen && screen.height) || 0);
+      cv.width = Math.round(w * dpr);
+      cv.height = Math.round(h * dpr);
+      cv.style.width = w + "px";
+      cv.style.height = h + "px";
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      crear();
+    }
+
+    function dibujar(t, dt) {
+      ctx.clearRect(0, 0, w, h);
+      var seg = t / 1000;
+      for (var i = 0; i < estrellas.length; i++) {
+        var s = estrellas[i];
+        if (dt) {
+          s.y += s.v * dt;
+          s.x += s.v * 0.3 * dt;
+          if (s.y > h + 4) { s.y = -4; s.x = Math.random() * w; }
+          if (s.x > w + 4) { s.x = -4; }
+        }
+        var brillo = quieto ? s.a : s.a * (0.45 + 0.55 * (0.5 + 0.5 * Math.sin(seg * s.vel + s.fase)));
+        ctx.globalAlpha = brillo;
+        ctx.fillStyle = s.oro ? "#f3dca4" : "#ece6da";
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, 6.2832);
+        ctx.fill();
+        if (s.destello) {
+          var t2 = s.r * 9 * brillo;
+          ctx.globalAlpha = brillo * 0.55;
+          ctx.drawImage(halo, s.x - t2, s.y - t2, t2 * 2, t2 * 2);
+          ctx.globalAlpha = brillo * 0.5;
+          ctx.strokeStyle = "#f3dca4";
+          ctx.lineWidth = 0.6;
+          ctx.beginPath();
+          ctx.moveTo(s.x - t2, s.y); ctx.lineTo(s.x + t2, s.y);
+          ctx.moveTo(s.x, s.y - t2); ctx.lineTo(s.x, s.y + t2);
+          ctx.stroke();
+        }
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    function dibujarFugaz(dt) {
+      if (!fugaz) return;
+      fugaz.vida += dt;
+      fugaz.x += fugaz.vx * dt;
+      fugaz.y += fugaz.vy * dt;
+      var p = fugaz.vida / fugaz.dura;
+      if (p >= 1) { fugaz = null; return; }
+      var op = Math.sin(p * Math.PI);
+      var largo = 120;
+      var tx = fugaz.x - fugaz.vx / fugaz.rapidez * largo, ty = fugaz.y - fugaz.vy / fugaz.rapidez * largo;
+      var lg = ctx.createLinearGradient(fugaz.x, fugaz.y, tx, ty);
+      lg.addColorStop(0, "rgba(255,240,205," + (0.95 * op) + ")");
+      lg.addColorStop(1, "rgba(243,220,164,0)");
+      ctx.strokeStyle = lg;
+      ctx.lineWidth = 1.6;
+      ctx.lineCap = "round";
+      ctx.beginPath();
+      ctx.moveTo(fugaz.x, fugaz.y);
+      ctx.lineTo(tx, ty);
+      ctx.stroke();
+    }
+
+    function cuadro(t) {
+      var dt = antes ? Math.min((t - antes) / 1000, 0.05) : 0;
+      antes = t;
+      dibujar(t, dt);
+      proxFugaz -= dt * 1000;
+      if (!fugaz && proxFugaz <= 0) {
+        var ang = (25 + Math.random() * 20) * Math.PI / 180, rap = 520 + Math.random() * 260;
+        fugaz = { x: Math.random() * w * 0.7, y: Math.random() * h * 0.35, vx: Math.cos(ang) * rap, vy: Math.sin(ang) * rap, rapidez: rap, vida: 0, dura: 0.9 + Math.random() * 0.5 };
+        proxFugaz = 6000 + Math.random() * 9000;
+      }
+      dibujarFugaz(dt);
+      requestAnimationFrame(cuadro);
+    }
+
+    var ultimoAncho = 0, espera;
     window.addEventListener("resize", function () {
       if (window.innerWidth === ultimoAncho) return;
-      clearTimeout(t);
-      t = setTimeout(function () { ultimoAncho = window.innerWidth; dibujar(); }, 150);
+      clearTimeout(espera);
+      espera = setTimeout(function () { ultimoAncho = window.innerWidth; medir(); if (quieto) dibujar(0, 0); }, 150);
     });
     ultimoAncho = window.innerWidth;
-    dibujar();
+    medir();
+    if (quieto) dibujar(0, 0); else requestAnimationFrame(cuadro);
   })();
 
   /* ---------- Carga de productos ---------- */

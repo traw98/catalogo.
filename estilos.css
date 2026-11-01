@@ -60,12 +60,33 @@ a { color: var(--gold-hi); }
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background:
-    radial-gradient(60% 45% at 88% 6%, var(--nebula), transparent 70%),
-    radial-gradient(50% 40% at 4% 78%, var(--nebula-2), transparent 70%),
-    radial-gradient(80% 60% at 50% 40%, #0d0b12, var(--void) 75%);
+  overflow: hidden;
+  background: radial-gradient(80% 60% at 50% 40%, #0d0b12, var(--void) 75%);
 }
-.cielo canvas { width: 100%; height: 100%; display: block; }
+.cielo::before,
+.cielo::after {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  will-change: transform, opacity;
+}
+.cielo::before {
+  background: radial-gradient(38% 30% at 80% 18%, var(--nebula), transparent 70%);
+  animation: nebula-a 38s ease-in-out infinite alternate;
+}
+.cielo::after {
+  background: radial-gradient(34% 28% at 18% 76%, var(--nebula-2), transparent 70%);
+  animation: nebula-b 46s ease-in-out infinite alternate;
+}
+@keyframes nebula-a {
+  from { transform: translate3d(0, 0, 0) scale(1); opacity: .85; }
+  to   { transform: translate3d(-6%, 5%, 0) scale(1.12); opacity: 1; }
+}
+@keyframes nebula-b {
+  from { transform: translate3d(0, 0, 0) scale(1.05); opacity: 1; }
+  to   { transform: translate3d(7%, -4%, 0) scale(.95); opacity: .75; }
+}
+.cielo canvas { position: absolute; top: 0; left: 0; z-index: 1; display: block; }
 
 /* ---------- Marca ---------- */
 .marca-in {
@@ -76,14 +97,13 @@ a { color: var(--gold-hi); }
   gap: 10px;
 }
 .logo { display: grid; justify-items: center; gap: 2px; color: var(--gold); }
-.logo img {
-  width: 148px;
-  height: 148px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 1px solid var(--line-hi);
-  box-shadow: 0 0 40px rgba(212, 175, 106, .18);
+.logo-img {
+  width: min(300px, 74vw);
+  height: auto;
+  filter: drop-shadow(0 0 28px rgba(212, 175, 106, .16));
 }
+.logo-texto { display: none; }
+.logo.sin-logo .logo-texto { display: grid; justify-items: center; gap: 2px; }
 .corona { width: 46px; height: 20px; margin-bottom: 6px; }
 .aurev {
   font-family: var(--f-display);
@@ -528,6 +548,7 @@ main.envoltura { padding-block: 18px 72px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .cielo::before, .cielo::after { animation: none; }
   .aurev { animation: none; background-position: 40% 0; }
   .pieza-foto img, .pieza, .btn-wa { transition: none; }
 }

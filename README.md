@@ -12,6 +12,7 @@ No usa Claude ni ningún servicio pago. Todo se cambia desde github.com.
 | `fotos/` | Carpeta con las fotos de los productos | **Sí, siempre** |
 | `ajustes.js` | WhatsApp, Instagram, mensajes y texto del pie de página | A veces |
 | `logo.png` | Logo de la marca (súbelo con ese nombre exacto) | Una vez |
+| `icono.png`, `icono-512.png`, `og.jpg` | Ícono de la pestaña y la imagen que sale al compartir el enlace por WhatsApp o Instagram | No |
 | `index.html`, `estilos.css`, `app.js` | El diseño y el funcionamiento | **No** |
 
 ---
