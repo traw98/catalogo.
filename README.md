@@ -86,10 +86,10 @@ Recomendaciones:
 
 Cuando ya estén los productos reales, borra las filas `(ejemplo)` de `productos.csv` y las fotos `ejemplo-*.svg`.
 
-## 5. Logo e Instagram
+## 5. Logo, Instagram y TikTok
 
 - **Logo:** sube el logo a la carpeta principal con el nombre `logo.png`. Aparece solo arriba.
-- **Instagram:** en `ajustes.js`, escribe el usuario entre las comillas de `instagram: ""`, sin @.
+- **Instagram y TikTok:** en `ajustes.js`, cambia el usuario entre las comillas de `instagram:` o `tiktok:`, sin @. Si lo dejas vacío, el botón no aparece.
 
 ## Problemas comunes
 

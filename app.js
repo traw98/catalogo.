@@ -323,12 +323,31 @@
   $("pie-wa").textContent = A.whatsappVisible || ("+" + WA);
   $("pie-texto").textContent = A.piePagina || "";
   $("anio").textContent = new Date().getFullYear();
+  $("red-wa").href = $("flotante").href;
   var ig = String(A.instagram || "").replace(/^@/, "").trim();
   if (ig) {
+    var urlIG = "https://www.instagram.com/" + encodeURIComponent(ig) + "/";
     $("pie-ig").hidden = false;
-    $("pie-ig-link").href = "https://www.instagram.com/" + encodeURIComponent(ig) + "/";
+    $("pie-ig-link").href = urlIG;
     $("pie-ig-link").textContent = "@" + ig;
+    $("red-ig").href = urlIG;
+    $("red-ig").hidden = false;
   }
+  var tt = String(A.tiktok || "").replace(/^@/, "").trim();
+  if (tt) {
+    var urlTT = "https://www.tiktok.com/@" + encodeURIComponent(tt);
+    $("pie-tt").hidden = false;
+    $("pie-tt-link").href = urlTT;
+    $("pie-tt-link").textContent = "@" + tt;
+    $("red-tt").href = urlTT;
+    $("red-tt").hidden = false;
+  }
+  $("ir-catalogo").addEventListener("click", function (e) {
+    e.preventDefault();
+    var destino = document.querySelector(".filtros");
+    var quieto = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    destino.scrollIntoView({ behavior: quieto ? "auto" : "smooth", block: "start" });
+  });
 
   /* ---------- Cielo estrellado ---------- */
   (function () {

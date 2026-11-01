@@ -11,7 +11,10 @@ window.AJUSTES = {
   whatsappVisible: "+57 304 606 6497",
 
   // Usuario de Instagram SIN @ (ej: "aurev.jewelry"). Si queda vacío, no se muestra el botón.
-  instagram: "",
+  instagram: "aurev18k",
+
+  // Usuario de TikTok SIN @. Si queda vacío, no se muestra el botón.
+  tiktok: "aurev_18k",
 
   // Mensaje que llega al WhatsApp cuando alguien pide un producto.
   // {producto} {codigo} {precio} {enlace} se reemplazan solos.

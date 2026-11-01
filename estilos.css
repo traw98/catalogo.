@@ -121,9 +121,46 @@ a { color: var(--gold-hi); }
   .lema [lang="sv"] { display: block; font-size: 1.02rem; }
 }
 .como { margin: 0; color: var(--muted); font-size: .92rem; }
+.redes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  width: 100%;
+  max-width: 520px;
+  margin-top: 14px;
+}
+.red {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 10px 8px;
+  border: 1px solid var(--line-hi);
+  border-radius: var(--r);
+  background: rgba(7, 7, 11, .55);
+  color: var(--ink);
+  font: 500 .74rem/1.1 var(--f-body);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+  transition: border-color .2s, color .2s;
+}
+.red:hover { border-color: var(--gold-hi); color: var(--gold-hi); }
+.red-principal {
+  grid-column: 1 / -1;
+  min-height: 52px;
+  background: linear-gradient(135deg, var(--gold-hi) 0%, var(--gold) 45%, var(--gold-lo) 100%);
+  color: var(--on-gold);
+  border-color: var(--gold);
+  font-weight: 600;
+  font-size: .8rem;
+}
+.red-principal:hover { color: var(--on-gold); filter: brightness(1.08); }
 
 /* ---------- Filtros ---------- */
 .filtros {
+  scroll-margin-top: env(safe-area-inset-top, 0px);
   position: sticky;
   top: env(safe-area-inset-top, 0px);
   z-index: 5;
